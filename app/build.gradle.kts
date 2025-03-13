@@ -40,4 +40,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.converter)
+    implementation(libs.rxjava3)
+    implementation(libs.adapter)
+    implementation(libs.rxandroid)
+    implementation(libs.picasso)
+    implementation(libs.glide)
 }

@@ -1,5 +1,6 @@
 package com.example.formulaapi;
 
+import com.example.formulaapi.circuits.CircuitsResponse;
 import com.example.formulaapi.teamsAndDrivers.DriversResponse;
 import com.example.formulaapi.teamsAndDrivers.TeamsResponse;
 
@@ -13,4 +14,7 @@ public interface ApiService {
 
     @GET("2025/teams/{teamId}/drivers")
     Observable<DriversResponse> getDriversList(@Path("teamId") String teamId);
+
+    @GET("circuits")
+    Observable<CircuitsResponse> getCircuitsList();
 }

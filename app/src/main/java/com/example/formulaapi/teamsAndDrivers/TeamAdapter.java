@@ -3,7 +3,6 @@ package com.example.formulaapi.teamsAndDrivers;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +40,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
-        ImageView logo;
 
         public ViewHolder(View itemView) {
             super(itemView);

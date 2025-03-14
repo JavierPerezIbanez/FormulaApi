@@ -25,16 +25,30 @@ public class CircuitDetailActivity extends AppCompatActivity {
         TextView fastestLapYearTextView = findViewById(R.id.fastestLapYear);
         TextView urlTextView = findViewById(R.id.url);
 
+
+
         Intent intent = getIntent();
-        nameTextView.setText(intent.getStringExtra("name"));
-        locationTextView.setText(intent.getStringExtra("location"));
-        lengthTextView.setText(String.valueOf(intent.getIntExtra("length", 0)));
-        lapRecordTextView.setText(intent.getStringExtra("lapRecord"));
-        participationYearTextView.setText(String.valueOf(intent.getIntExtra("firstParticipationYear", 0)));
-        numberOfCornersTextView.setText(String.valueOf(intent.getIntExtra("numberOfCorners", 0)));
-        fastestLapDriverTextView.setText(intent.getStringExtra("fastestLapDriverId"));
-        fastestLapTeamTextView.setText(intent.getStringExtra("fastestLapTeamId"));
-        fastestLapYearTextView.setText(String.valueOf(intent.getIntExtra("fastestLapYear", 0)));
-        urlTextView.setText(intent.getStringExtra("url"));
+        String name = "Nombre: " + intent.getStringExtra("name");
+        String location = "Ubicacion: " + intent.getStringExtra("location");
+        String length = "Duracion: " + String.valueOf(intent.getIntExtra("length", 0));
+        String lapRecord = "Tiempo vuelta mas rapida: " + intent.getStringExtra("lapRecord");
+        String firstParticipationYear = "Primera participacion del año: " + String.valueOf(intent.getIntExtra("firstParticipationYear", 0));
+        String numberOfCorners = "Numero de esquinas: " + String.valueOf(intent.getIntExtra("numberOfCorners", 0));
+        String fastestLapDriverId = "Id del conductor de vuelta mas rapida: "  + intent.getStringExtra("fastestLapDriverId");
+        String fastestLapTeamId = "Id del equipo de vuelta mas rapida: " + intent.getStringExtra("fastestLapTeamId");
+        String fastestLapYear = "Vuelta mas rapida del año: " + String.valueOf(intent.getIntExtra("fastestLapYear", 0));
+        String url = "Url: " + intent.getStringExtra("url");
+
+
+        nameTextView.setText(name);
+        locationTextView.setText(location);
+        lengthTextView.setText(length);
+        lapRecordTextView.setText(lapRecord);
+        participationYearTextView.setText(firstParticipationYear);
+        numberOfCornersTextView.setText(numberOfCorners);
+        fastestLapDriverTextView.setText(fastestLapDriverId);
+        fastestLapTeamTextView.setText(fastestLapTeamId);
+        fastestLapYearTextView.setText(fastestLapYear);
+        urlTextView.setText(url);
     }
 }

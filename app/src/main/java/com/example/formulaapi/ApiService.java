@@ -1,6 +1,7 @@
 package com.example.formulaapi;
 
 import com.example.formulaapi.circuits.CircuitsResponse;
+import com.example.formulaapi.seasons.SeasonResponse;
 import com.example.formulaapi.teamsAndDrivers.DriversResponse;
 import com.example.formulaapi.teamsAndDrivers.TeamsResponse;
 
@@ -18,6 +19,11 @@ public interface ApiService {
 
     @GET("circuits")
     Observable<CircuitsResponse> getCircuitsList(
+            @Query("limit") int limit,
+            @Query("offset") int offset
+    );
+    @GET("seasons")
+    Observable<SeasonResponse> getSeasonsList(
             @Query("limit") int limit,
             @Query("offset") int offset
     );

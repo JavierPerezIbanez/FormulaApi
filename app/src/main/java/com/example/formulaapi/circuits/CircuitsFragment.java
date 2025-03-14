@@ -37,7 +37,7 @@ public class CircuitsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        circuitAdapter = new CircuitAdapter(new ArrayList<>());
+        circuitAdapter = new CircuitAdapter(new ArrayList<>(), getContext());
         recyclerView.setAdapter(circuitAdapter);
 
         recyclerView.addOnScrollListener(new OnScrollListener() {

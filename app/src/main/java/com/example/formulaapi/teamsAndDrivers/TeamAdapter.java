@@ -1,7 +1,6 @@
 package com.example.formulaapi.teamsAndDrivers;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,13 +79,10 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
                 .subscribe(
                         driversResponse -> {
                             List<Driver> drivers = driversResponse.getDrivers();
-                            for (Driver driver : drivers) {
-                                Log.d("Driver", "ID: " + driver.getDriverId() + ", Family Name: " + driver.getSurname());
-                            }
                             driverAdapter.updateDrivers(drivers);
                         },
                         error -> {
-                            Log.e("Error", error.toString());
+                            // Manejar el error
                         }
                 );
     }

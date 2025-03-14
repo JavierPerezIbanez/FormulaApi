@@ -1,119 +1,54 @@
 package com.example.formulaapi;
 
 public class Driver {
-    private String broadcastName;
-    private String country;
-    private int driverNumber;
-    private String firstName;
-    private String fullName;
+    private String driverId;
+    private String name;
+    private String surname;
+    private String nationality;
+    private String birthday;
+    private int number;
+    private String shortName;
     private String url;
-    private int meetingKey;
-    private String acronym;
-    private int sessionKey;
-    private String teamColor;
-    private String teamName;
+    private String teamId;
+    private String fullName;
 
-    public Driver(String broadcastName, String teamName, String teamColor, int sessionKey, String acronym,
-                  int meetingKey, String url, String fullName, String firstName, String country, int driverNumber) {
-        this.broadcastName = broadcastName;
-        this.teamName = teamName;
-        this.teamColor = teamColor;
-        this.sessionKey = sessionKey;
-        this.acronym = acronym;
-        this.meetingKey = meetingKey;
-        this.url = url;
-        this.fullName = fullName;
-        this.firstName = firstName;
-        this.country = country;
-        this.driverNumber = driverNumber;
+    public String getDriverId() {
+        return driverId;
     }
 
-    public String getBroadcastName() {
-        return broadcastName;
+    public String getName() {
+        return name;
     }
 
-    public void setBroadcastName(String broadcastName) {
-        this.broadcastName = broadcastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getCountry() {
-        return country;
+    public String getNationality() {
+        return nationality;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public int getDriverNumber() {
-        return driverNumber;
+    public int getNumber() {
+        return number;
     }
 
-    public void setDriverNumber(int driverNumber) {
-        this.driverNumber = driverNumber;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getShortName() {
+        return shortName;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getTeamId() {
+        return teamId;
     }
 
-    public int getMeetingKey() {
-        return meetingKey;
-    }
-
-
-    public void setMeetingKey(int meetingKey) {
-        this.meetingKey = meetingKey;
-    }
-
-    public String getAcronym() {
-        return acronym;
-    }
-
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
-    }
-
-    public int getSessionKey() {
-        return sessionKey;
-    }
-
-    public void setSessionKey(int sessionKey) {
-        this.sessionKey = sessionKey;
-    }
-
-    public String getTeamColor() {
-        return teamColor;
-    }
-
-    public void setTeamColor(String teamColor) {
-        this.teamColor = teamColor;
-    }
-
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public String getFullName() {
+        return name+" "+surname;
     }
 }

@@ -35,9 +35,10 @@ public class CircuitAdapter extends RecyclerView.Adapter<CircuitAdapter.ViewHold
         return circuits.size();
     }
 
-    public void updateCircuits(List<Circuit> circuits) {
-        this.circuits = circuits;
-        notifyDataSetChanged();
+    public void addCircuits(List<Circuit> newCircuits) {
+        int startPosition = circuits.size();
+        circuits.addAll(newCircuits);
+        notifyItemRangeInserted(startPosition, newCircuits.size());
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,7 +1,6 @@
 package com.example.formulaapi.circuits;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import com.example.formulaapi.ApiService;
 import com.example.formulaapi.R;
 
@@ -26,6 +26,9 @@ public class CircuitsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CircuitAdapter circuitAdapter;
     private ApiService apiService;
+    private boolean isLoading = false;
+    private int offset = 0;
+    private final int limit = 30;
 
     @Nullable
     @Override
@@ -36,6 +39,17 @@ public class CircuitsFragment extends Fragment {
 
         circuitAdapter = new CircuitAdapter(new ArrayList<>());
         recyclerView.setAdapter(circuitAdapter);
+
+        recyclerView.addOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (!isLoading && layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == circuitAdapter.getItemCount() - 1) {
+                    loadCircuits(); // Cargar más circuitos cuando se llega al final
+                    isLoading = true;
+                }
+            }
+        });
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://f1api.dev/api/")
@@ -50,21 +64,20 @@ public class CircuitsFragment extends Fragment {
     }
 
     private void loadCircuits() {
-        apiService.getCircuitsList()
+        apiService.getCircuitsList(limit, offset)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         circuitsResponse -> {
                             List<Circuit> circuits = circuitsResponse.getCircuits();
-                            for (Circuit circuit : circuits) {
-                                Log.d("Circuit", "ID: " + circuit.getCircuitId() + ", Name: " + circuit.getCircuitName());
-                            }
-                            circuitAdapter.updateCircuits(circuits);
+                            circuitAdapter.addCircuits(circuits);
+                            offset += limit; // Incrementa el offset para la siguiente carga
+                            isLoading = false;
                         },
                         error -> {
-                            Log.e("Error", error.toString());
+                            // Manejar el error
+                            isLoading = false;
                         }
                 );
     }
-
 }

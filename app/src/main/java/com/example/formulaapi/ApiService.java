@@ -7,6 +7,7 @@ import com.example.formulaapi.teamsAndDrivers.TeamsResponse;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("2025/teams")
@@ -16,5 +17,8 @@ public interface ApiService {
     Observable<DriversResponse> getDriversList(@Path("teamId") String teamId);
 
     @GET("circuits")
-    Observable<CircuitsResponse> getCircuitsList();
+    Observable<CircuitsResponse> getCircuitsList(
+            @Query("limit") int limit,
+            @Query("offset") int offset
+    );
 }

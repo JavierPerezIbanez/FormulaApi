@@ -50,7 +50,7 @@ public class DriversFragment extends Fragment {
                 .subscribe(
                         teamsResponse -> {
                             List<Team> teams = teamsResponse.getTeams();
-                            teamAdapter = new TeamAdapter(teams);
+                            teamAdapter = new TeamAdapter(getContext(), teams);
                             recyclerView.setAdapter(teamAdapter);
                         },
                         error -> {

@@ -1,49 +1,51 @@
 package com.example.formulaapi;
 
 import android.os.Bundle;
-import android.util.Log;
-
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import java.util.List;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private TeamAdapter teamAdapter;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_drivers) {
+                    selectedFragment = new DriversFragment();
+                } else if (itemId == R.id.nav_seasons) {
+                    selectedFragment = new SeasonsFragment();
+                } else if (itemId == R.id.nav_circuits) {
+                    selectedFragment = new CircuitsFragment();
+                }
+                if (selectedFragment != null) {
+                    loadFragment(selectedFragment);
+                }
+                return true;
+            }
+        });
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://f1api.dev/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
+        // Cargar el fragmento de Pilotos al iniciar la aplicación
+        loadFragment(new DriversFragment());
+    }
 
-        ApiService service = retrofit.create(ApiService.class);
-
-        service.getTeamsList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        teamsResponse -> {
-                            List<Team> teams = teamsResponse.getTeams();
-                            teamAdapter = new TeamAdapter(teams);
-                            recyclerView.setAdapter(teamAdapter);
-                        },
-                        error -> Log.e("Error", error.toString())
-                );
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.formulaapi;
+package com.example.formulaapi.teamsAndDrivers;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.squareup.picasso.Picasso;
+
+import com.example.formulaapi.R;
+
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {

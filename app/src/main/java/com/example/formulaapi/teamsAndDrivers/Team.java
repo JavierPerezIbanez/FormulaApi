@@ -1,4 +1,4 @@
-package com.example.formulaapi;
+package com.example.formulaapi.teamsAndDrivers;
 
 public class Team {
     private String teamId;

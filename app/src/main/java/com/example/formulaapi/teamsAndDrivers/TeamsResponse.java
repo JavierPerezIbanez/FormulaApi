@@ -1,4 +1,4 @@
-package com.example.formulaapi;
+package com.example.formulaapi.teamsAndDrivers;
 
 import java.util.List;
 

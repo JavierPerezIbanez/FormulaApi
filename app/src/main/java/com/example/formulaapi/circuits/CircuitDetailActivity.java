@@ -28,15 +28,15 @@ public class CircuitDetailActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String name = "Nombre: " + intent.getStringExtra("name");
+        String name = intent.getStringExtra("name");
         String location = "Ubicacion: " + intent.getStringExtra("location");
-        String length = "Duracion: " + String.valueOf(intent.getIntExtra("length", 0));
-        String lapRecord = "Tiempo vuelta mas rapida: " + intent.getStringExtra("lapRecord");
-        String firstParticipationYear = "Primera participacion del año: " + String.valueOf(intent.getIntExtra("firstParticipationYear", 0));
-        String numberOfCorners = "Numero de esquinas: " + String.valueOf(intent.getIntExtra("numberOfCorners", 0));
-        String fastestLapDriverId = "Id del conductor de vuelta mas rapida: "  + intent.getStringExtra("fastestLapDriverId");
-        String fastestLapTeamId = "Id del equipo de vuelta mas rapida: " + intent.getStringExtra("fastestLapTeamId");
-        String fastestLapYear = "Vuelta mas rapida del año: " + String.valueOf(intent.getIntExtra("fastestLapYear", 0));
+        String length = "Longitud(m): " + String.valueOf(intent.getIntExtra("length", 0));
+        String lapRecord = "Record de vuelta: " + intent.getStringExtra("lapRecord");
+        String firstParticipationYear = "Año de primera participación: " + String.valueOf(intent.getIntExtra("firstParticipationYear", 0));
+        String numberOfCorners = "Número de curvas: " + String.valueOf(intent.getIntExtra("numberOfCorners", 0));
+        String fastestLapDriverId = "Piloto con el record de vuelta: "  + intent.getStringExtra("fastestLapDriverId");
+        String fastestLapTeamId = "Equipo con el record de vuelta: " + intent.getStringExtra("fastestLapTeamId");
+        String fastestLapYear = "Año del record de vuelta: " + String.valueOf(intent.getIntExtra("fastestLapYear", 0));
         String url = "Url: " + intent.getStringExtra("url");
 
 

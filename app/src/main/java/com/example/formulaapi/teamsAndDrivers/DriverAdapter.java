@@ -27,6 +27,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Driver driver = drivers.get(position);
+        holder.number.setText(String.valueOf(driver.getNumber()));
         holder.name.setText(driver.getFullName());
     }
 
@@ -41,10 +42,12 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView number;
         TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            number = itemView.findViewById(R.id.driverNumber);
             name = itemView.findViewById(R.id.driverName);
         }
     }

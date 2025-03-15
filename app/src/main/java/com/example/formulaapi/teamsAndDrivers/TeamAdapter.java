@@ -1,6 +1,5 @@
 package com.example.formulaapi.teamsAndDrivers;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,8 +82,8 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        driversResponse -> {
-                            List<Driver> drivers = driversResponse.getDrivers();
+                        teamDriversResponse -> {
+                            List<Driver> drivers = teamDriversResponse.getDrivers();
                             driverAdapter.updateDrivers(drivers);
                         },
                         error -> {

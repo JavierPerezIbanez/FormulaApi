@@ -1,4 +1,4 @@
-package com.example.formulaapi.circuits;
+package com.example.formulaapi.antiguos.seasons;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
+
+import com.example.formulaapi.seasonFiles.Season;
 import com.example.formulaapi.ApiService;
 import com.example.formulaapi.R;
+import com.example.formulaapi.seasonFiles.SeasonAdapter;
+
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -21,31 +25,31 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CircuitsFragment extends Fragment {
-
+public class SeasonsFragment extends Fragment {
     private RecyclerView recyclerView;
-    private CircuitAdapter circuitAdapter;
+    private SeasonAdapter seasonAdapter;
     private ApiService apiService;
     private boolean isLoading = false;
     private int offset = 0;
     private final int limit = 30;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_circuits, container, false);
+        View view = inflater.inflate(R.layout.fragment_seasons, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        circuitAdapter = new CircuitAdapter(new ArrayList<>(), getContext());
-        recyclerView.setAdapter(circuitAdapter);
+        seasonAdapter = new SeasonAdapter(new ArrayList<>());
+        recyclerView.setAdapter(seasonAdapter);
 
         recyclerView.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (!isLoading && layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == circuitAdapter.getItemCount() - 1) {
-                    loadCircuits(); // Cargar más circuitos cuando se llega al final
+                if (!isLoading && layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition() == seasonAdapter.getItemCount() - 1) {
+                    loadSeasons(); // Cargar más temporadas cuando se llega al final
                     isLoading = true;
                 }
             }
@@ -58,26 +62,11 @@ public class CircuitsFragment extends Fragment {
                 .build();
         apiService = retrofit.create(ApiService.class);
 
-        loadCircuits();
+        loadSeasons();
 
         return view;
     }
+    private void loadSeasons() {
 
-    private void loadCircuits() {
-        apiService.getCircuitsList(limit, offset)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        circuitsResponse -> {
-                            List<Circuit> circuits = circuitsResponse.getCircuits();
-                            circuitAdapter.addCircuits(circuits);
-                            offset += limit; // Incrementa el offset para la siguiente carga
-                            isLoading = false;
-                        },
-                        error -> {
-                            // Manejar el error
-                            isLoading = false;
-                        }
-                );
     }
 }

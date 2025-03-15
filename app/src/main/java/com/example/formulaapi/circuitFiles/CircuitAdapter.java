@@ -1,4 +1,4 @@
-package com.example.formulaapi.circuits;
+package com.example.formulaapi.circuitFiles;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.formulaapi.antiguos.circuits.CircuitDetailActivity;
 import com.example.formulaapi.ApiService;
 import com.example.formulaapi.R;
-import com.example.formulaapi.teamsAndDrivers.Driver;
-import com.example.formulaapi.teamsAndDrivers.DriverAdapter;
+import com.example.formulaapi.driverFiles.Driver;
+import com.example.formulaapi.driverFiles.DriverAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,25 +74,7 @@ public class CircuitAdapter extends RecyclerView.Adapter<CircuitAdapter.ViewHold
             Driver driver = driverCache.get(driverId);
             setupClickListener(holder, circuit, driver);
         } else {
-            // Si el piloto no está en la cache, se hace la llamada a la API
-            apiService.getDriver(driverId)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            driversResponse -> {
-                                if (driversResponse != null && driversResponse.getDrivers() != null && !driversResponse.getDrivers().isEmpty()) {
-                                    Driver driver = driversResponse.getDrivers().get(0);
-                                    driverCache.put(driverId, driver);
-                                    setupClickListener(holder, circuit, driver);
-                                } else {
-                                    setupClickListener(holder, circuit, null);
-                                }
-                            },
-                            error -> {
-                                Log.e("API_ERROR", "Error al obtener los datos del piloto", error);
-                                setupClickListener(holder, circuit, null);
-                            }
-                    );
+
 
 
 
@@ -151,17 +134,6 @@ public class CircuitAdapter extends RecyclerView.Adapter<CircuitAdapter.ViewHold
     }
 
     private void loadDrivers(String driverId, DriverAdapter driverAdapter) {
-        apiService.getDriver(driverId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        driversResponse -> {
-                            List<Driver> drivers = driversResponse.getDrivers();
-                            driverAdapter.updateDrivers(drivers);
-                        },
-                        error -> {
-                            // Manejar el error
-                        }
-                );
+
     }
 }

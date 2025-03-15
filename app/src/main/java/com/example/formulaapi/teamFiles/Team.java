@@ -1,15 +1,26 @@
-package com.example.formulaapi.teamsAndDrivers;
+package com.example.formulaapi.teamFiles;
 
-public class Team {
+import com.example.formulaapi.baseFiles.BaseEntity;
+import com.google.gson.annotations.SerializedName;
+
+public class Team implements BaseEntity {
+    @SerializedName("teamId")
     private String teamId;
+    @SerializedName("nameName")
     private String teamName;
+    @SerializedName("teamNationality")
     private String teamNationality;
+    @SerializedName("firstAppeareance")
     private int firstAppeareance;
+    @SerializedName("constructorsChampionships")
     private int constructorsChampionships;
+    @SerializedName("driversChampionships")
     private int driversChampionships;
+    @SerializedName("url")
     private String url;
 
-    public String getTeamId() {
+    @Override
+    public String getId() {
         return teamId;
     }
 

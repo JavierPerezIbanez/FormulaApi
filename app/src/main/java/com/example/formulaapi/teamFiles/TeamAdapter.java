@@ -1,4 +1,4 @@
-package com.example.formulaapi.teamsAndDrivers;
+package com.example.formulaapi.teamFiles;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.formulaapi.driverFiles.Driver;
+import com.example.formulaapi.driverFiles.DriverAdapter;
 import com.example.formulaapi.ApiService;
 import com.example.formulaapi.R;
 
@@ -58,7 +60,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         holder.driversRecyclerView.setAdapter(driverAdapter);
 
         // Cargar los pilotos
-        loadDrivers(team.getTeamId(), driverAdapter);
+
     }
 
     @Override
@@ -78,17 +80,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     }
 
     private void loadDrivers(String teamId, DriverAdapter driverAdapter) {
-        apiService.getDriversList(teamId, currentYear)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        teamDriversResponse -> {
-                            List<Driver> drivers = teamDriversResponse.getDrivers();
-                            driverAdapter.updateDrivers(drivers);
-                        },
-                        error -> {
-                            // Manejar el error
-                        }
-                );
+
     }
 }

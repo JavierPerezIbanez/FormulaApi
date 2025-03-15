@@ -77,7 +77,7 @@ public class DriverDetailFragment extends Fragment {
                         startActivity(intent);
                     });
                 }, error -> {
-                    // Manejo de errores (puedes mostrar un mensaje al usuario o loguear el error)
+                    // Manejo de errores
                 });
 
         return view;

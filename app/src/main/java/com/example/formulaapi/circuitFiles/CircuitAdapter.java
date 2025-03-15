@@ -1,139 +1,76 @@
 package com.example.formulaapi.circuitFiles;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.formulaapi.antiguos.circuits.CircuitDetailActivity;
-import com.example.formulaapi.ApiService;
 import com.example.formulaapi.R;
-import com.example.formulaapi.driverFiles.Driver;
-import com.example.formulaapi.driverFiles.DriverAdapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-/**
- * Proporciona la conexión entre Circuit y RecycleView para que se puedan mostrar los datos
- */
 public class CircuitAdapter extends RecyclerView.Adapter<CircuitAdapter.ViewHolder> {
     private List<Circuit> circuits;
-    private Context context;
-    private ApiService apiService;
-    private final HashMap<String, Driver> driverCache = new HashMap<>();
+    private OnItemClickListener onItemClickListener;
 
-
-    public CircuitAdapter(List<Circuit> circuits, Context context) {
-        this.circuits = circuits;
-        this.context = context;
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://f1api.dev/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
-        apiService = retrofit.create(ApiService.class);
+    // Interfaz para el clic en un circuito
+    public interface OnItemClickListener {
+        void onItemClick(Circuit circui);
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
+    public CircuitAdapter(List<Circuit> circuits) {
+        this.circuits = circuits != null ? circuits : Collections.emptyList();
+    }
+
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.circuit_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Circuit circuit = circuits.get(position);
         holder.name.setText(circuit.getCircuitName());
-        holder.location.setText(circuit.getCity() + ", " + circuit.getCountry());
+        holder.location.setText(circuit.getCity()+", "+circuit.getCountry());
 
-        // Para obtener la info del piloto
-        DriverAdapter driverAdapter = new DriverAdapter(new ArrayList<>());
-        holder.driversRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        holder.driversRecyclerView.setAdapter(driverAdapter);
-
-        String driverId = circuit.getFastestLapDriverId();
-
-        if (driverCache.containsKey(driverId)) {
-            // Si el piloto ya está en la cache, usamos los datos
-            Driver driver = driverCache.get(driverId);
-            setupClickListener(holder, circuit, driver);
-        } else {
-
-
-
-
-        }
-    }
-
-    private void setupClickListener(ViewHolder holder, Circuit circuit, @Nullable Driver driver) {
+        // Configurar el clic
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, CircuitDetailActivity.class);
-            intent.putExtra("name", circuit.getCircuitName());
-            intent.putExtra("location", circuit.getCity() + ", " + circuit.getCountry());
-            intent.putExtra("length", circuit.getCircuitLength());
-            intent.putExtra("lapRecord", circuit.getLapRecord());
-            intent.putExtra("firstParticipationYear", circuit.getFirstParticipationYear());
-            intent.putExtra("numberOfCorners", circuit.getNumberOfCorners());
-            intent.putExtra("fastestLapTeamId", circuit.getFastestLapTeamId());
-            intent.putExtra("fastestLapYear", circuit.getFastestLapYear());
-            intent.putExtra("url", circuit.getUrl());
-
-            // Añade los datos del piloto si están disponibles
-            if (driver != null) {
-                intent.putExtra("fastestLapDriverName", driver.getFullName());
-                intent.putExtra("fastestLapDriverNumber", driver.getNumber());
-            } else {
-                intent.putExtra("fastestLapDriverName", "No disponible");
-                intent.putExtra("fastestLapDriverNumber", "No disponible");
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(circuit);
             }
-
-            context.startActivity(intent);
         });
     }
-
-
 
     @Override
     public int getItemCount() {
         return circuits.size();
     }
 
-    public void addCircuits(List<Circuit> newCircuits) {
-        int startPosition = circuits.size();
-        circuits.addAll(newCircuits);
-        notifyItemRangeInserted(startPosition, newCircuits.size());
+    public void updateCircuits(List<Circuit> circuits) {
+        System.out.println("Actualizando adaptador con: " + circuits.size() + " pilotos.");
+        this.circuits = circuits != null ? circuits : Collections.emptyList();
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        TextView location;
-        RecyclerView driversRecyclerView;
+        TextView name, location;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.circuitName);
             location = itemView.findViewById(R.id.circuitLocation);
-            driversRecyclerView = itemView.findViewById(R.id.driversRecyclerView);
         }
     }
-
-    private void loadDrivers(String driverId, DriverAdapter driverAdapter) {
-
-    }
 }
+
+

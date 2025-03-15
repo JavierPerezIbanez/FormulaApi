@@ -1,11 +1,9 @@
 package com.example.formulaapi;
 
+import com.example.formulaapi.circuitFiles.Circuit;
 import com.example.formulaapi.circuitFiles.CircuitResponse;
 import com.example.formulaapi.driverFiles.Driver;
-import com.example.formulaapi.seasonFiles.SeasonResponse;
 import com.example.formulaapi.driverFiles.DriverResponse;
-import com.example.formulaapi.antiguos.teamsAndDrivers.TeamDriversResponse;
-import com.example.formulaapi.teamFiles.TeamResponse;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
@@ -21,4 +19,10 @@ public interface ApiService {
     Observable<DriverResponse<Driver>> getDrivers(@Query("offset") int offset,
                                                   @Query("limit") int limit);
 
+    @GET("circuits/{circuitId}")
+    Observable<CircuitResponse<Circuit>> getCircuit(@Path("circuitId") String circuitId);
+
+    @GET("circuits")
+    Observable<CircuitResponse<Circuit>> getCircuits(@Query("offset") int offset,
+                                                      @Query("limit") int limit);
 }

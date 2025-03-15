@@ -1,23 +1,39 @@
-package com.example.formulaapi.circuits;
+package com.example.formulaapi.circuitFiles;
+
+import com.example.formulaapi.baseFiles.BaseEntity;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Objeto Circuito con los todos los campos que devuelve la API
  */
-public class Circuit {
+public class Circuit implements BaseEntity {
+    @SerializedName("circuitId")
     private String circuitId;
+    @SerializedName("circuitName")
     private String circuitName;
+    @SerializedName("country")
     private String country;
+    @SerializedName("city")
     private String city;
+    @SerializedName("circuitLength")
     private int circuitLength;
+    @SerializedName("lapRecord")
     private String lapRecord;
+    @SerializedName("firstParticipationYear")
     private int firstParticipationYear;
+    @SerializedName("numberOfCorners")
     private int numberOfCorners;
+    @SerializedName("fastestLapDriverId")
     private String fastestLapDriverId;
+    @SerializedName("fastestLapTeamId")
     private String fastestLapTeamId;
+    @SerializedName("fastestLapYear")
     private int fastestLapYear;
+    @SerializedName("url")
     private String url;
 
-    public String getCircuitId() {
+    @Override
+    public String getId() {
         return circuitId;
     }
 

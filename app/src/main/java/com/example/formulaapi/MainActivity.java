@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.formulaapi.circuits.CircuitsFragment;
-import com.example.formulaapi.seasons.SeasonsFragment;
-import com.example.formulaapi.teamsAndDrivers.DriversFragment;
+import com.example.formulaapi.circuitFiles.CircuitsFragment;
+import com.example.formulaapi.driverFiles.DriversFragment;
+import com.example.formulaapi.seasonFiles.SeasonsFragment;
+import com.example.formulaapi.teamFiles.TeamsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

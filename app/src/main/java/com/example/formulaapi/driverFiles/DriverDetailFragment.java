@@ -37,7 +37,7 @@ public class DriverDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_driver_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_drivers_detail, container, false);
 
         String driverId = getArguments().getString(ARG_DRIVER_ID);
 

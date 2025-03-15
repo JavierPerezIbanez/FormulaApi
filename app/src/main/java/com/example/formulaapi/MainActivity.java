@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.formulaapi.circuitFiles.CircuitsFragment;
 import com.example.formulaapi.driverFiles.DriversFragment;
+import com.example.formulaapi.teamFiles.TeamsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.nav_drivers) {
                     selectedFragment = new DriversFragment();
                 } else if (itemId == R.id.nav_seasons) {
-                    //selectedFragment = new SeasonsFragment();
+                    selectedFragment = new TeamsFragment();
                 } else if (itemId == R.id.nav_circuits) {
                     selectedFragment = new CircuitsFragment();
                 }

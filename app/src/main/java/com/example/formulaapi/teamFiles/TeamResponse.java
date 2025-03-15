@@ -5,12 +5,35 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class TeamResponse extends BaseResponse<Team> {
+public class TeamResponse<T> extends BaseResponse<T> {
     @SerializedName("teams")
-    private List<Team> teams;
+    private List<T> teams; // Para listas de equipos
 
-    @Override
-    public List<Team> getItems() {
-        return teams;
+    @SerializedName("team")
+    private List<T> team; // Para consultas de un único equipo
+
+    @SerializedName("limit")
+    private int limit;
+
+    @SerializedName("offset")
+    private int offset;
+
+    @SerializedName("total")
+    private int total;
+
+    public List<T> getItems() {
+        return teams != null ? team : team;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public int getTotal() {
+        return total;
     }
 }

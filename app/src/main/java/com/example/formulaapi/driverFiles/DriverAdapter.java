@@ -57,7 +57,6 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.ViewHolder
     }
 
     public void updateDrivers(List<Driver> drivers) {
-        System.out.println("Actualizando adaptador con: " + drivers.size() + " pilotos.");
         this.drivers = drivers != null ? drivers : Collections.emptyList();
         notifyDataSetChanged();
     }

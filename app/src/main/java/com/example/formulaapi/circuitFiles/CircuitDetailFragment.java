@@ -75,7 +75,7 @@ public class CircuitDetailFragment extends Fragment {
                     lengthTextView.setText("Longitud: " + circuit.getCircuitLength());
                     recordTextView.setText("Record: " + circuit.getLapRecord());
                     firstYearTextView.setText("Año de inicio: " + circuit.getFirstParticipationYear());
-                    numberCornersTextView.setText("Número de CORNER: " + circuit.getNumberOfCorners());
+                    numberCornersTextView.setText("Número de curvas: " + circuit.getNumberOfCorners());
                     fastestDriverIdTextView.setText("Piloto más rápido: " + circuit.getFastestLapDriverId());
                     fastestTeamIdTextView.setText("Equipo más rápido: " + circuit.getFastestLapTeamId());
                     fastestLapYearTextView.setText("Año del mejor vuelta: " + circuit.getFastestLapYear());

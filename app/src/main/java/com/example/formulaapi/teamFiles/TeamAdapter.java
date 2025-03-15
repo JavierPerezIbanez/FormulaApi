@@ -1,4 +1,4 @@
-package com.example.formulaapi.circuitFiles;
+package com.example.formulaapi.teamFiles;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,61 +13,59 @@ import com.example.formulaapi.R;
 import java.util.Collections;
 import java.util.List;
 
-public class CircuitAdapter extends RecyclerView.Adapter<CircuitAdapter.ViewHolder> {
-    private List<Circuit> circuits;
+public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
+    private List<Team> teams;
     private OnItemClickListener onItemClickListener;
 
-    // Interfaz para el clic en un circuito
+    // Interfaz para el clic en un equipo
     public interface OnItemClickListener {
-        void onItemClick(Circuit circui);
+        void onItemClick(Team team);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
     }
 
-    public CircuitAdapter(List<Circuit> circuits) {
-        this.circuits = circuits != null ? circuits : Collections.emptyList();
+    public TeamAdapter(List<Team> teams) {
+        this.teams = teams != null ? teams : Collections.emptyList();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.circuit_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.team_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Circuit circuit = circuits.get(position);
-        holder.name.setText(circuit.getCircuitName());
-        holder.location.setText(circuit.getCity()+", "+circuit.getCountry());
+        Team team = teams.get(position);
+        holder.name.setText(team.getTeamName());
 
         // Configurar el clic
         holder.itemView.setOnClickListener(v -> {
             if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(circuit);
+                onItemClickListener.onItemClick(team);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return circuits.size();
+        return teams.size();
     }
 
-    public void updateCircuits(List<Circuit> circuits) {
-        this.circuits = circuits != null ? circuits : Collections.emptyList();
+    public void updateTeams(List<Team> teams) {
+        this.teams = teams != null ? teams : Collections.emptyList();
         notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, location;
+        TextView number, name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.circuitName);
-            location = itemView.findViewById(R.id.circuitLocation);
+            name = itemView.findViewById(R.id.teamName);
         }
     }
 }

@@ -43,4 +43,7 @@ public interface ApiService {
     @GET("seasons")
     Observable<SeasonResponse<Season>> getSeasons(@Query("offset") int offset,
                                             @Query("limit") int limit);
+
+    @GET("2025/teams")
+    Observable<TeamResponse<Team>> getTeams2025();
 }

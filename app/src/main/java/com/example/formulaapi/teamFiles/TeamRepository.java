@@ -36,6 +36,17 @@ public class TeamRepository {
     }
 
     /**
+     * Obtener la lista completa de equipos de la temporada 2025 desde la API.
+     */
+    public Observable<List<Team>> getTeams2025() {
+        return apiService.getTeams2025()
+                .map(response -> {
+                    List<Team> teams = response.getItems(); // Recolecta los equipos
+                    return teams;
+                });
+    }
+
+    /**
      * Obtener un equipo específico por su ID.
      *
      * Primero busca en la caché local y, si no se encuentra, realiza una llamada a la API.

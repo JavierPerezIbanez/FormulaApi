@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Team implements BaseEntity {
     @SerializedName("teamId")
     private String teamId;
-    @SerializedName("nameName")
+    @SerializedName("teamName")
     private String teamName;
     @SerializedName("teamNationality")
     private String teamNationality;

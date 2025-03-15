@@ -22,7 +22,7 @@ public class TeamResponse<T> extends BaseResponse<T> {
     private int total;
 
     public List<T> getItems() {
-        return teams != null ? team : team;
+        return teams != null ? teams : team;
     }
 
     public int getLimit() {

@@ -18,12 +18,16 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class DriversFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private TeamAdapter teamAdapter;
+    private LocalDate currentDate = LocalDate.now();
+    private String currentYear = String.valueOf(currentDate.getYear());
 
     @Nullable
     @Override
@@ -44,7 +48,7 @@ public class DriversFragment extends Fragment {
 
         ApiService service = retrofit.create(ApiService.class);
 
-        service.getTeamsList()
+        service.getTeamsList(currentYear)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

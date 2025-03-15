@@ -11,17 +11,42 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
-    @GET("2025/teams")
-    Observable<TeamsResponse> getTeamsList();
 
-    @GET("2025/teams/{teamId}/drivers")
-    Observable<DriversResponse> getDriversList(@Path("teamId") String teamId);
+    /**
+     * Get the list of teams in a certain year
+     * @param year is the year selected
+     */
+    @GET("{year}/teams")
+    Observable<TeamsResponse> getTeamsList(@Path ("year") String year);
 
+    /**
+     * Get the list of drivers od a certain team in a certain year
+     * @param teamId is the team selected
+     * @param year is the team selected
+     */
+    @GET("{year}/teams/{teamId}/drivers")
+    Observable<DriversResponse> getDriversList(@Path("teamId") String teamId,
+                                               @Path("year") String year);
+
+    /**
+     * get the information of the driver with the driverId given
+     * @param driverId whose info is wanted
+     */
+    @GET("drivers/{driverId}")
+    Observable<DriversResponse> getDriversList(@Path("driverId") String driverId);
+
+    /**
+     * Get the list of circuits
+     */
     @GET("circuits")
     Observable<CircuitsResponse> getCircuitsList(
             @Query("limit") int limit,
             @Query("offset") int offset
     );
+
+    /**
+     * Get the list of seasons
+     */
     @GET("seasons")
     Observable<SeasonResponse> getSeasonsList(
             @Query("limit") int limit,

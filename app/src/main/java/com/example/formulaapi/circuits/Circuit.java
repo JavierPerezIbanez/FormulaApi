@@ -1,5 +1,8 @@
 package com.example.formulaapi.circuits;
 
+/**
+ * Objeto Circuito con los todos los campos que devuelve la API
+ */
 public class Circuit {
     private String circuitId;
     private String circuitName;

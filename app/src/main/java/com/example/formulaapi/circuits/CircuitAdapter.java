@@ -12,6 +12,9 @@ import com.example.formulaapi.R;
 
 import java.util.List;
 
+/**
+ * Proporciona la conexión entre Circuit y RecycleView para que se puedan mostrar los datos
+ */
 public class CircuitAdapter extends RecyclerView.Adapter<CircuitAdapter.ViewHolder> {
     private List<Circuit> circuits;
     private Context context;

@@ -1,5 +1,6 @@
 package com.example.formulaapi.teamsAndDrivers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,9 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     private List<Team> teams;
     private Context context;
     private ApiService apiService;
+
+    private LocalDate currentDate = LocalDate.now();
+    private String currentYear = String.valueOf(currentDate.getYear());
 
     public TeamAdapter(Context context, List<Team> teams) {
         this.context = context;
@@ -73,7 +79,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     }
 
     private void loadDrivers(String teamId, DriverAdapter driverAdapter) {
-        apiService.getDriversList(teamId)
+        apiService.getDriversList(teamId, currentYear)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

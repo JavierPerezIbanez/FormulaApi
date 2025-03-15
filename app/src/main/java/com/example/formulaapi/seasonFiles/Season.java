@@ -4,14 +4,14 @@ import com.example.formulaapi.baseFiles.BaseEntity;
 import com.google.gson.annotations.SerializedName;
 
 public class Season implements BaseEntity {
-    @SerializedName("seasonId")
+    @SerializedName("championshipId")
     private String seasonId;
-    @SerializedName("name")
+    @SerializedName("championshipName")
     private String name;
     @SerializedName("url")
     private String url;
     @SerializedName("year")
-    private int year;
+    private String year;
 
     @Override
     public String getId() {
@@ -26,7 +26,7 @@ public class Season implements BaseEntity {
         return url;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 }

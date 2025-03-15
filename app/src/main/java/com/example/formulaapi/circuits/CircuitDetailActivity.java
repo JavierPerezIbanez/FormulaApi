@@ -14,28 +14,43 @@ public class CircuitDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_circuit_detail);
 
+        // Inicializar las vistas
         TextView nameTextView = findViewById(R.id.circuitName);
         TextView locationTextView = findViewById(R.id.circuitLocation);
         TextView lengthTextView = findViewById(R.id.circuitLength);
-        TextView lapRecordTextView = findViewById(R.id.lapRecord);
+        TextView cornersTextView = findViewById(R.id.numberOfCorners);
         TextView participationYearTextView = findViewById(R.id.firstParticipationYear);
-        TextView numberOfCornersTextView = findViewById(R.id.numberOfCorners);
-        TextView fastestLapDriverTextView = findViewById(R.id.fastestLapDriver);
-        TextView fastestLapTeamTextView = findViewById(R.id.fastestLapTeam);
-        TextView fastestLapYearTextView = findViewById(R.id.fastestLapYear);
         TextView urlTextView = findViewById(R.id.url);
+        TextView lapRecordTextView = findViewById(R.id.lapRecord);
+        TextView fastestLapDriverTextView = findViewById(R.id.fastestLapDriver);
+        TextView fastestLapYearTextView = findViewById(R.id.fastestLapYear);
+        TextView fastestLapTeamTextView = findViewById(R.id.fastestLapTeam);
 
+        // Obtener datos del Intent
         Intent intent = getIntent();
-        nameTextView.setText(intent.getStringExtra("name"));
-        locationTextView.setText("Ubicación: " + intent.getStringExtra("location"));
-        lengthTextView.setText("Longitud(m): " + intent.getIntExtra("length", 0));
-        lapRecordTextView.setText("Récord de vuelta: " + intent.getStringExtra("lapRecord"));
-        participationYearTextView.setText("Año de primera participación: " + intent.getIntExtra("firstParticipationYear", 0));
-        numberOfCornersTextView.setText("Número de curvas: " + intent.getIntExtra("numberOfCorners", 0));
-        fastestLapDriverTextView.setText("Piloto con récord: " + intent.getStringExtra("fastestLapDriverName"));
-        fastestLapTeamTextView.setText("Equipo con el récord: " + intent.getStringExtra("fastestLapTeamId"));
-        fastestLapYearTextView.setText("Año del récord: " + intent.getIntExtra("fastestLapYear", 0));
-        urlTextView.setText("URL: " + intent.getStringExtra("url"));
+        String name = intent.getStringExtra("name");
+        String location = intent.getStringExtra("location");
+        String length = "Longitud: " + intent.getIntExtra("length", 0) + "m";
+        String corners = "Número de curvas: " + intent.getIntExtra("numberOfCorners", 0);
+        String firstParticipationYear = "Año de primera participación: " + intent.getIntExtra("firstParticipationYear", 0);
+        String url = intent.getStringExtra("url");
+        String lapRecord = "Récord de vuelta: " + intent.getStringExtra("lapRecord");
+        String fastestLapDriver = "Piloto con récord: " + intent.getStringExtra("fastestLapDriverName");
+        String fastestLapYear = "Año del récord: " + intent.getIntExtra("fastestLapYear", 0);
+        String fastestLapTeam = "Equipo con récord: " + intent.getStringExtra("fastestLapTeamId");
+
+        // Configurar las vistas
+        nameTextView.setText(name);
+        locationTextView.setText(location);
+        lengthTextView.setText(length);
+        cornersTextView.setText(corners);
+        participationYearTextView.setText(firstParticipationYear);
+        urlTextView.setText(url);
+        lapRecordTextView.setText(lapRecord);
+        fastestLapDriverTextView.setText(fastestLapDriver);
+        fastestLapYearTextView.setText(fastestLapYear);
+        fastestLapTeamTextView.setText(fastestLapTeam);
     }
+
 
 }

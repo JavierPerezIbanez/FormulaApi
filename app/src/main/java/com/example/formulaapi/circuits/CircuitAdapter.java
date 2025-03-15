@@ -61,6 +61,7 @@ public class CircuitAdapter extends RecyclerView.Adapter<CircuitAdapter.ViewHold
         holder.name.setText(circuit.getCircuitName());
         holder.location.setText(circuit.getCity() + ", " + circuit.getCountry());
 
+        // Para obtener la info del piloto
         DriverAdapter driverAdapter = new DriverAdapter(new ArrayList<>());
         holder.driversRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.driversRecyclerView.setAdapter(driverAdapter);

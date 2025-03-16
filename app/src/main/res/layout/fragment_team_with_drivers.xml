@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Nombre del equipo en grande -->
+    <TextView
+        android:id="@+id/teamName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Equipo"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Nacionalidad -->
+    <TextView
+        android:id="@+id/teamNationality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nacionalidad: "
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Fecha de aparición -->
+    <TextView
+        android:id="@+id/firstAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Primera aparición: "
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Campeonatos de constructores -->
+    <TextView
+        android:id="@+id/constructorsChampionships"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Títulos de constructores: "
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Campeonatos de pilotos -->
+    <TextView
+        android:id="@+id/driversChampionships"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Títulos de pilotos: "
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Enlace del equipo -->
+    <TextView
+        android:id="@+id/teamUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Página web del equipo"
+        android:textSize="16sp"
+        android:textColor="@color/blue"
+        android:textStyle="italic"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Título para la lista de pilotos -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pilotos:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- RecyclerView para pilotos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDrivers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+</LinearLayout>

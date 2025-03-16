@@ -9,10 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.formulaapi.circuitFiles.CircuitsFragment;
-import com.example.formulaapi.driverFiles.DriversFragment;
-import com.example.formulaapi.driverFiles.SeasonDriversFragment;
+import com.example.formulaapi.driverFiles.SeasonTeamsFragment;
 import com.example.formulaapi.seasonFiles.SeasonsFragment;
-import com.example.formulaapi.teamFiles.TeamsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 int itemId = item.getItemId();
                 if (itemId == R.id.nav_drivers) {
-                    selectedFragment = new SeasonDriversFragment();
+                    selectedFragment = new SeasonTeamsFragment();
                 } else if (itemId == R.id.nav_seasons) {
                     selectedFragment = new SeasonsFragment();
                 } else if (itemId == R.id.nav_circuits) {
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Cargar el fragmento de Pilotos al iniciar la aplicación
-        loadFragment(new SeasonDriversFragment());
+        loadFragment(new SeasonTeamsFragment());
     }
 
     private void loadFragment(Fragment fragment) {

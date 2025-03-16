@@ -1,5 +1,7 @@
 package com.example.formulaapi.driverFiles;
 
+import android.util.Log;
+
 import com.example.formulaapi.ApiService;
 
 import java.util.ArrayList;
@@ -33,6 +35,31 @@ public class DriverRepository {
             instance = new DriverRepository(apiService);
         }
         return instance;
+    }
+
+    /**
+     * Obtener una lista de pilotos para un equipo específico de 2025.
+     */
+    public Observable<List<Driver>> getTeamDrivers2025(String teamId) {
+        return apiService.getTeamDrivers2025(teamId)
+                .map(response -> {
+                    List<Driver> drivers = new ArrayList<>();
+
+                    // Extraer los objetos "Driver" desde los wrappers
+                    for (TeamDriversResponse.DriverWrapper wrapper : response.getDrivers()) {
+                        drivers.add(wrapper.getDriver());
+                    }
+
+                    // Guardar en la caché para accesos futuros
+                    for (Driver driver : drivers) {
+                        if (!driverCache.containsKey(driver.getId())) {
+                            driverCache.put(driver.getId(), driver);
+                            driverListCache.add(driver);
+                        }
+                    }
+
+                    return drivers; // Devolver la lista de pilotos
+                });
     }
 
     /**

@@ -4,6 +4,7 @@ import com.example.formulaapi.circuitFiles.Circuit;
 import com.example.formulaapi.circuitFiles.CircuitResponse;
 import com.example.formulaapi.driverFiles.Driver;
 import com.example.formulaapi.driverFiles.DriverResponse;
+import com.example.formulaapi.driverFiles.TeamDriversResponse;
 import com.example.formulaapi.seasonFiles.Season;
 import com.example.formulaapi.seasonFiles.SeasonResponse;
 import com.example.formulaapi.teamFiles.Team;
@@ -46,4 +47,7 @@ public interface ApiService {
 
     @GET("2025/teams")
     Observable<TeamResponse<Team>> getTeams2025();
+
+    @GET("2025/teams/{teamId}/drivers")
+    Observable<TeamDriversResponse> getTeamDrivers2025(@Path("teamId") String teamId);
 }

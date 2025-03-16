@@ -27,7 +27,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SeasonDriversFragment extends Fragment {
+public class SeasonTeamsFragment extends Fragment {
 
     private TeamRepository teamRepository;
     private TeamAdapter teamAdapter;
@@ -37,7 +37,7 @@ public class SeasonDriversFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflar el diseño del fragmento
-        View view = inflater.inflate(R.layout.fragment_season_drivers, container, false);
+        View view = inflater.inflate(R.layout.fragment_season_teams, container, false);
 
         // Configurar RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewTeams);
@@ -54,6 +54,11 @@ public class SeasonDriversFragment extends Fragment {
         // Configurar botones
         Button buttonAllTeams = view.findViewById(R.id.buttonAllTeams);
         Button buttonAllDrivers = view.findViewById(R.id.buttonAllDrivers);
+
+        teamAdapter.setOnItemClickListener(team -> {
+            // Navegar a TeamDetailFragment con el ID del equipo seleccionado
+            replaceFragment(TeamWithDriversFragment.newInstance(team.getId()));
+        });
 
         buttonAllTeams.setOnClickListener(v -> {
             // Navegar a TeamsFragment

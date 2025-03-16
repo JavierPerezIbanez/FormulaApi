@@ -32,12 +32,12 @@
     <!-- Fecha de aparición -->
     <TextView
         android:id="@+id/firstAppearance"
-        android:layout_width="match_parent"
+        android:layout_width="373dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Primera aparición: "
-        android:textSize="16sp"
         android:textColor="@color/black"
-        android:layout_marginBottom="8dp" />
+        android:textSize="16sp" />
 
     <!-- Campeonatos de constructores -->
     <TextView

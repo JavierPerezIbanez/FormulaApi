@@ -23,9 +23,9 @@
 
         <TextView
             android:id="@+id/circuitLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"/>
+            android:layout_width="285dp"
+            android:layout_height="37dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
